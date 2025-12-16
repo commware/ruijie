@@ -51,7 +51,13 @@ Ruijie(config-vs-domain)# dual-active pair interface gi1/4/2 interface gi2/4/2  
 Ruijie(config-vs-domain)# dual-active exclude interface  ten1/1/2   ------>configure the exception port
 Ruijie(config-vs-domain)# dual-active exclude interface  ten2/1/2  
 
-
+____________ACIKLAMA__________________________________
+Dual-Active Detection (BFD) Portlarının Niteliği
+Dual-active detection için kullanılan portlar:
+Sadece şasiler arası kontrol amacıyla kullanılır
+Kullanıcı, server, access veya uplink trafiği taşımaz
+Mantık olarak stack / VSL portlarına eşdeğerdir
+_______________________________________________________
 Dual-Active Oluştuğunda Ne Olur?
 Aşama	              Açıklama
 VSL kopar	          Şasiler birbirini kaybeder

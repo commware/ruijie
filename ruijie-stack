@@ -1,0 +1,66 @@
+________________________VSU SWITCH STACKING CONFIGURATIONS___________________________________
+#SW-1                     #Birinci Anahtar
+Configure Terminal
+!switch virtual domain 1   #Domain Oluştur.
+!switch 1 
+!switch 1 priority 200 /DEFAULT PRIORITY IS 100
+
+#SW-2 /Ikinci Anahtar     #Ikinci anahtar
+!switch virtual domain 1  #Domain Oluştur.
+!switch 2 
+!switch 2 priority 150 
+
+#Port Ayarlari 
+!vsl-port                                      #Sanal Port olusturma
+!port-member interface TenGigabitEthernet 2/1  #  
+!port-member interface TenGigabitEthernet 2/2
+!exit
+#Fiziksel Baglantilarin Olusturulmasi
+#Switch konfigurasyon kayıt edilmesi,Switch Mode VSU Çevrilmesi.
+!wr
+#SW-1
+!switch  convert mode virtual
+#SW-2
+!switch  convert mode virtual
+
+
+___________SHOW COMMANDS  
+!show switch id
+!show switch virtual   
+!show switch virtual link
+!show switch virtual topology
+!show switch virtual role
+show switch virtual dual-active bfd
+
+!redundancy forceswitch
+!redundancy reload shelf 1 
+
+
+___________BFD  COMMANDS __________________________
+
+1. Configuring Dual-active Detections
+Ruijie(config)# interface gi2/4/2
+Ruijie(config-if)# no switchport ------>BFD detection must be applid on a Layer 3 port
+Ruijie(config-if)# exit
+Ruijie(config)# interface gi1/4/2
+Ruijie(config-if)# no switchport
+Ruijie (config-if)# exit
+Ruijie (config)# switch virtual domain 1
+Ruijie(config-vs-domain)# dual-active detection bfd ------>enable BFD feature
+Ruijie(config-vs-domain)# dual-active pair interface gi1/4/2 interface gi2/4/2    ------>configure a pair of BFD detection ports
+Ruijie(config-vs-domain)# dual-active exclude interface  ten1/1/2   ------>configure the exception port
+Ruijie(config-vs-domain)# dual-active exclude interface  ten2/1/2  
+
+
+Dual-Active Oluştuğunda Ne Olur?
+Aşama	              Açıklama
+VSL kopar	          Şasiler birbirini kaybeder
+BFD aktif	          Dual-Active tespit edilir
+Priority kontrolü	  Düşük öncelikli şasi seçilir
+Recovery Mode	      Portlar kapatılır
+Ağ stabil olur	    Çakışmalar önlenir
+        
+        
+
+
+

@@ -1,1 +1,77 @@
 
+
+RUIJIE ENTERPRISE BASIC CONFIGS AND COMMANDS 
+no logging on 
+show file systems 
+show version____________________________________________________________________
+enable
+configure terminal
+hostname RUIJIE-SW
+exit
+
+____________________!KULLANICI EKLEME AYARI____________________________
+config terminal 
+password policy min-size 9
+password policy forced-password-modify
+username admin1 privilege 15 password 0 Password1
+username admin1 login mode ssh
+username admin1 login mode telnet
+username admin1 login mode console
+username admin1 login mode ftp
+!
+!show user
+!show users all
+!show password policy
+!show privilege
+_________________!VIRTUAL TERMINAL SSH  TELNET ICIN ONEMLI______________
+line vty 0 4
+login local
+_____________________SERVISLERI ACMA____________________________________
+enable service telnet-server
+enable service ssh-server
+enable service web-server all
+________________________________________________________________________
+line console 0
+ login local
+ password 0 Password1
+line vty 0 4
+ login local
+ password 7 Password1
+ 
+CONSOLE 
+configure terminal
+line console 0
+login local  
+password Password1
+secret 0 Password1 
+history size 120
+idle-timeout 10   (örn. 10 dakika)
+privilege level 15
+quit
+!!! no login local
+!!! no login 
+!!! no password
+------------------------------------------
+SNMP SERVER 
+!no snmp-server 
+!no enable service snmp-agent
+
+snmp-server contact  it@department
+snmp-server location  ankara@ankara
+
+snmp-server group snmpv2-group v2c 		              /SNMP Group Olusturma
+snmp-server user snmpv2-user snmpv2-group v2c             /SNMP User  Olusturma
+snmp-server group snmpv2-group v2c  write default  /SNMP Group Erisim verme 
+snmp-server community snmp-comm rw 					  /SNMP Community Olusturma
+snmp-server enable traps
+
+-----------------------------------------------------------------
+
+snmp-server user snmpv3-user snmpv3-group v3  auth md5 Ruijie123 priv des56 Ruijie321
+snmp-server group snmpv3-group v3 priv read default write default 
+
+
+
+
+
+

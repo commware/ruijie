@@ -70,8 +70,14 @@ snmp-server enable traps
 snmp-server user snmpv3-user snmpv3-group v3  auth md5 Ruijie123 priv des56 Ruijie321
 snmp-server group snmpv3-group v3 priv read default write default 
 
-
-
+------------------LINK AGG ---------------------------------------
+SW1>enable
+SW1#configure
+SW1(config)#interface range gigabitEthernet 0/1-3
+SW1(config-if-range)#port-group 1 mode active  //Configure port 1-3 as the same LACP group
+SW1(config-if-range)#end
+SW1#write
+_________________________________________________________________
 
 
 

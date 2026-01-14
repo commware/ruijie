@@ -80,6 +80,35 @@ Supplicant information:
   IP privilege .......................... 0
   Private supplicant .................... no
   Max user number on this port .......... 0
+--------------------------------
+5. Birden fazla RADIUS varsa nasıl olur?
+5.1 RADIUS server’ları tanımlarsın
+radius-server host 192.168.1.10 key radius123
+radius-server host 192.168.1.11 key radius123
 
+
+veya (daha temiz yol):
+
+radius-server group RADIUS-GRP
+ server 192.168.1.10
+ server 192.168.1.11
+
+5.2 Named Dot1X listesi oluşturursun
+aaa authentication dot1x DOT1X-RADIUS group RADIUS-GRP local
+
+
+Anlamı:
+
+RADIUS-GRP dene
+
+RADIUS yoksa → local user
+
+5.3 Port üzerinde bu listeyi çağırırsın
+interface GigabitEthernet0/1
+ dot1x authentication-method DOT1X-RADIUS
+
+
+⚠ Eğer default kullanırsan portta belirtmen gerekmez
+Named liste kullanırsan mutlaka interface altında çağırmalısın
 
 

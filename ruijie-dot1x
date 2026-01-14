@@ -1,106 +1,85 @@
-enable
 configure terminal
 
-! ============================================
-! 1. RADIUS SUNUCU TANIMLAMA
-! ============================================
-radius-server host 192.168.5.110 auth-port 1812
-radius-server host 192.168.5.110 acct-port 1813
-radius-server host 192.168.5.110 key Password1
-radius-server timeout 5
-radius-server retransmit 3
+!
+! ---------- LOCAL USER (opsiyonel / fallback)
+!
+username admin1 privilege 15 password Password1
 
-! ============================================
-! 2. AAA AYARLARI
-! ============================================
+!
+! ---------- AAA
+!
 aaa new-model
 aaa authentication dot1x default group radius
+aaa authentication login default group radius local
+aaa authorization exec default local
 aaa authorization network default group radius
 aaa accounting network default start-stop group radius
+aaa accounting exec default start-stop none
 
-! ============================================
-! 3. 802.1x GLOBAL AYARLAR
-! ============================================
-dot1x authentication radius
-dot1x auth-mode eap
-dot1x max-req 3
-dot1x re-authentication
-dot1x reauth-max 3
+!
+! ---------- RADIUS
+!
+no radius-server key Password1
+radius-server host 192.168.5.110 key Password1
 
-! ============================================
-! 4. TIMEOUT AYARLARI
-! ============================================
-dot1x timeout auth-period 30
+!
+! ---------- DOT1X GLOBAL (S2910 / RGOS 11.x)
+!
+dot1x authentication default
 dot1x timeout quiet-period 60
-dot1x timeout reauth-period 3600
-dot1x timeout server-timeout 5
-dot1x timeout tx-period 30
 
-! ============================================
-! 5. VLAN ve DİĞER AYARLAR
-! ============================================
-dot1x auth-fail vlan 100
-dot1x client-probe enable
-dot1x probe-timer 300
-dot1x logging
-dot1x logging success
-dot1x logging fail
+!
+! ---------- VLAN
+!
+vlan range 1,100
 
-! ============================================
-! 6. PORT KONFİGÜRASYONU (ÖRNEK: PORT 1)
-! ============================================
-interface gigabitEthernet 0/1
-  description 802.1x-Enabled Port
-  switchport mode access
-  switchport access vlan 10
-  dot1x port-control auto
-  dot1x guest-vlan 99
-  dot1x auth-fail vlan 100
-  dot1x multi-host enable
-  spanning-tree portfast
-  spanning-tree bpduguard enable
-  exit
+!
+! ---------- INTERFACE (802.1X AKTİF PORT)
+!
+interface GigabitEthernet 0/1
+ dot1x authentication default
+ dot1x port-control auto
+ dot1x auto-req
+ dot1x guest-vlan 1
+ dot1x auth-fail vlan 100
+ poe enable
 
-! ============================================
-! 7. BİRDEN FAZLA PORT İÇİN (İSTEĞE BAĞLI)
-! ============================================
-! interface range gigabitEthernet 0/1-24
-!   switchport mode access
-!   switchport access vlan 10
-!   dot1x port-control auto
-!   dot1x auth-fail vlan 100
-!   spanning-tree portfast
-!   spanning-tree bpduguard enable
-!   exit
+!
+! ---------- MANAGEMENT VLAN
+!
+interface VLAN 1
+ ip address 192.168.5.1 255.255.255.0
 
 end
 write memory
 
-------------------------------------------------------
-! 1. RADIUS sunucuyu kontrol et
-show radius servers
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+Ruijie#show dot1x  summary
 
-! 2. 802.1x durumunu kontrol et
-show dot1x
+ID        Username   MAC            Interface VLAN Auth-State      Backend-state Port-Status User-Type Time
+--------- ---------- -------------- --------- ---- --------------- ------------- ----------- --------- -----------------
+5         ferdi      0800.27a8.9ac9 Gi0/1     1    Authenticated   Idle          Authed      static    0days 0h13m51s
+ 
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+Ruijie#show dot1x  user  name ferdi
+Supplicant information:
+  MAC address ........................... 0800.27a8.9ac9
+  Username .............................. ferdi
+  User ID ............................... 5
+  Type .................................. static
+  VLAN .................................. 1
+  Port .................................. Gi0/1
+  Online duration ....................... 0days 0h13m53s
+  Up average bandwidth .................. 0 kBps
+  Down average bandwidth ................ 0 kBps
+  Authorized session time ............... unlimited
+  Authorized flux ....................... unlimited
+  Accounting ............................ Start
+  Proxy user ............................ Permit
+  Dial user ............................. Permit
+  IP privilege .......................... 0
+  Private supplicant .................... no
+  Max user number on this port .......... 0
 
-! 3. Port durumunu kontrol et
-show dot1x interface gigabitEthernet 0/1
 
-! 4. Konfigürasyonu kontrol et
-show running-config | include radius
-show running-config | include dot1x
 
-! 5. Tüm konfigürasyonu gör
-show running-config
-show dot1x sessions
-show dot1x dynamic-users
-------------
-! RADIUS testi yap
-test aaa group radius username KULLANICI password SIFRE
-
-! Debug aç
-debug dot1x
-debug radius
-
-! Debug kapat
-no debug all

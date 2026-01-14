@@ -110,5 +110,16 @@ interface GigabitEthernet0/1
 
 ⚠ Eğer default kullanırsan portta belirtmen gerekmez
 Named liste kullanırsan mutlaka interface altında çağırmalısın
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!1111
+. Özel RADIUS group örneği
+radius-server group RADIUS-LAB
+ server 192.168.10.10
+ server 192.168.10.11
+
+
+Sonra:
+
+aaa authentication dot1x DOT1X-LAB group RADIUS-LAB local
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!11111
 
 

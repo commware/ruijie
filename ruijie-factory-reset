@@ -1,0 +1,9 @@
+___Device Factory Reset___
+RJ_STACK_SW>en
+
+Password:
+RJ_STACK_SW#delete config.text
+Do you want to delete [flash:/config.text]? [Y/N]:Yes
+Delete success.
+RJ_STACK_SW#Reload
+Reload system?(Y/N)Yes

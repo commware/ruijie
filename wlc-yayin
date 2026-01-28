@@ -1,0 +1,21 @@
+# Screen kurulu değilse:
+sudo apt install screen
+
+# sample avi dosyasi   /home/ferdi/sample.avi  altinda
+# Screen session oluştur:
+!
+screen -S multicast_stream -dm vlc -vvv /home/ferdi/sample.avi \
+  --miface enp0s8 \
+  --sout '#transcode{vcodec=h264,vb=800,scale=1,acodec=mpga,ab=128,channels=2}:rtp{mux=ts,dst=235.5.5.5,port=1234,ttl=16}' \
+  --sout-keep \
+  --loop
+!
+# Screen session'a bağlan:
+# screen -r multicast_stream
+!
+# Session'dan çıkmak için:
+# Ctrl+A, D
+
+
+!!!!!!!!!!ALICI WINDOWS 
+C:\Program Files\VideoLAN\VLC\vlc.exe" --miface=192.168.5.88 udp://@235.5.5.5:1234

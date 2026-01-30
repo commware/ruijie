@@ -1,0 +1,98 @@
+VTEP1 vs VTEP2 — YAN YANA KONFİGÜRASYON
+=========================== VTEP1 =========================== | =========================== VTEP2 ===========================
+
+🔹 VRF
+ip vrf vrf-10                                                 | ip vrf vrf-20
+ rd 10:10                                                     |  rd 20:20
+ route-target export 1000:1000                                |  route-target export 2000:2000
+                                                              |
+
+🔹 LOOPBACK INTERFACELER
+interface Loopback 1                                          | interface Loopback 1
+ ip address 1.1.1.1 255.255.255.255                            |  ip address 2.2.2.2 255.255.255.255
+                                                              |
+interface Loopback 2                                          | interface Loopback 2
+ ip address 3.3.3.3 255.255.255.255                            |  ip address 4.4.4.4 255.255.255.255
+                                                              |
+
+🔹 ANYCAST GATEWAY MAC
+fabric anycast-gateway-mac 0011.2233.2016                     | fabric anycast-gateway-mac 0011.2233.2016
+                                                              |
+
+🔹 VTEP TANIMI
+vtep                                                          | vtep
+ source loopback 1                                            |  source loopback 1
+ vxlan outside center vtep-ip 2.2.2.2                         |  vxlan outside center vtep-ip 1.1.1.1
+                                                              |
+
+🔹 OVERLAY ROUTER – L2 GATEWAY’LER
+interface OverlayRouter 10                                    | interface OverlayRouter 20
+ ip vrf binding vrf-10                                        |  ip vrf binding vrf-20
+ ip address 10.1.1.1 255.255.255.0                            |  ip address 20.1.1.1 255.255.255.0
+ anycast-gateway                                              |  anycast-gateway
+                                                              |
+interface OverlayRouter 30                                    | interface OverlayRouter 30
+ ip vrf binding vrf-10                                        |  ip vrf binding vrf-20
+ ip address 30.1.1.1 255.255.255.0                            |  ip address 30.1.1.1 255.255.255.0
+ anycast-gateway                                              |  anycast-gateway
+                                                              |
+
+🔹 OVERLAY ROUTER – L3 (SYMMETRIC)
+interface OverlayRouter 100                                   | interface OverlayRouter 200
+ ip vrf binding vrf-10                                        |  ip vrf binding vrf-20
+                                                              |
+interface OverlayRouter 300                                   | interface OverlayRouter 300
+ ip vrf binding vrf-10                                        |  ip vrf binding vrf-20
+                                                              |
+
+🔹 VXLAN – L2 (ASYMMETRIC)
+vxlan 10                                                      | vxlan 20
+ router-interface OverlayRouter 10                            |  router-interface OverlayRouter 20
+ mapping vni 30                                               |  mapping vni 30
+ arp suppress enable                                         |  arp suppress enable
+                                                              |
+vxlan 30                                                      | vxlan 30
+ router-interface OverlayRouter 30                            |  router-interface OverlayRouter 30
+ arp suppress enable                                         |  arp suppress enable
+                                                              |
+
+🔹 VXLAN – L3 (SYMMETRIC)
+vxlan 100                                                     | vxlan 200
+ router-interface OverlayRouter 100                           |  router-interface OverlayRouter 200
+ l3mapping vni 300                                            |  l3mapping vni 300
+ symmetric                                                    |  symmetric
+                                                              |
+vxlan 300                                                     | vxlan 300
+ router-interface OverlayRouter 300                           |  router-interface OverlayRouter 300
+                                                              |
+
+🔹 BGP EVPN
+router-protocol bgp 100                                      | router-protocol bgp 100
+ peer 4.4.4.4 remote-as 100                                  |  peer 3.3.3.3 remote-as 100
+ peer 4.4.4.4 update-source Loopback 2                       |  peer 3.3.3.3 update-source Loopback 2
+                                                              |
+ address-family-mode l2vpn evpn                               |  address-family-mode l2vpn evpn
+  advertise ipv4 unicast-af-modifier                          |   advertise ipv4 unicast-af-modifier
+  peer 4.4.4.4 activate                                      |   peer 3.3.3.3 activate
+  peer 4.4.4.4 send-community extended                       |   peer 3.3.3.3 send-community extended
+                                                              |
+ address-family-mode ipv4 vrf vrf-10                          |  address-family-mode ipv4 vrf vrf-20
+  redistribute-route connected                                |   redistribute-route connected
+                                                              |
+
+🔹 EVPN VNI TANIMLARI
+evpn                                                          | evpn
+ vni 10                                                       |  vni 20
+  rd auto                                                     |   rd auto
+  route-target both auto                                     |   route-target both auto
+ vni 30                                                       |  vni 30
+  rd auto                                                     |   rd auto
+  route-target both auto                                     |   route-target both auto
+ vni 100                                                      |  vni 200
+  rd auto                                                     |   rd auto
+  route-target both auto                                     |   route-target both auto
+ vni 300                                                      |  vni 300
+  rd auto                                                     |   rd auto
+  route-target both auto                                     |   route-target both auto
+
+🔴

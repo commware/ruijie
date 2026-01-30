@@ -1,0 +1,144 @@
+Hedefin şu:
+
+✔ VLAN 10 → VNI 10
+✔ VLAN 20 → VNI 20
+✔ L2 domain’ler ayrı
+✔ L3 routing L3 VNI üzerinden (symmetric)
+
+Aşağıda temiz, mantıklı ve standart bir EVPN-VXLAN tasarımı var.
+
+🎯 TASARIM ÖZETİ (SENİN İSTEDİĞİN)
+Katman	Leaf-A	Leaf-B
+L2 VNI	VLAN10 → VNI10	VLAN20 → VNI20
+L3 VNI	colspan=2 VNI 1000	
+VRF	colspan=2 vrf-10	
+EVPN	BGP EVPN	
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!CONFIG!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+🔹 VTEP-A (Leaf-1)
+interface loopback0
+ ip address 1.1.1.1/32
+
+interface loopback1
+ ip address 2.2.2.2/32
+
+fabric anycast-gateway-mac 0011.2233.2016
+
+vtep
+ source loopback0
+ arp suppress enable
+
+VRF
+ip vrf vrf-10
+ rd 10:10
+ route-target both 1000:1000
+
+L2 – VLAN 10 → VNI 10
+interface overlayrouter 10
+ ip vrf binding vrf-10
+ ip address 10.10.10.1/24
+ anycast-gateway
+ route-in-vni
+
+vxlan 10
+ extend-vlan 10
+ router-interface overlayrouter 10
+ arp suppress enable
+
+L3 – Symmetric VXLAN (L3 VNI 1000)
+interface overlayrouter 1000
+ ip vrf binding vrf-10
+
+vxlan 1000
+ symmetric
+ router-interface overlayrouter 1000
+
+BGP EVPN
+router-protocol bgp 64512
+ bgp-instance router-id 2.2.2.2
+ peer 3.3.3.3 remote-as 64512
+ peer 3.3.3.3 update-source loopback1
+
+ address-family-mode l2vpn evpn
+  peer 3.3.3.3 activate
+
+EVPN VNIs
+evpn
+ vni 10
+  rd auto
+  route-target both auto
+ vni 1000
+  rd auto
+  route-target both auto
+
+🔹 VTEP-B (Leaf-2)
+interface loopback0
+ ip address 4.4.4.4/32
+
+interface loopback1
+ ip address 3.3.3.3/32
+
+fabric anycast-gateway-mac 0011.2233.2016
+
+vtep
+ source loopback0
+ arp suppress enable
+
+VRF
+ip vrf vrf-10
+ rd 10:10
+ route-target both 1000:1000
+
+L2 – VLAN 20 → VNI 20
+interface overlayrouter 20
+ ip vrf binding vrf-10
+ ip address 10.20.20.1/24
+ anycast-gateway
+ route-in-vni
+
+vxlan 20
+ extend-vlan 20
+ router-interface overlayrouter 20
+ arp suppress enable
+
+L3 – Symmetric VXLAN (L3 VNI 1000)
+interface overlayrouter 1000
+ ip vrf binding vrf-10
+
+vxlan 1000
+ symmetric
+ router-interface overlayrouter 1000
+
+BGP EVPN
+router-protocol bgp 64512
+ bgp-instance router-id 3.3.3.3
+ peer 2.2.2.2 remote-as 64512
+ peer 2.2.2.2 update-source loopback1
+
+ address-family-mode l2vpn evpn
+  peer 2.2.2.2 activate
+
+EVPN VNIs
+evpn
+ vni 20
+  rd auto
+  route-target both auto
+ vni 1000
+  rd auto
+  route-target both auto
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+🧠 BU TASARIMDA NE NETLEŞTİ?
+
+✔ L2 domain = VNI (1:1)
+✔ VLAN numarası ile VNI aynı → kafa karışmaz
+✔ L2 subnet’ler ayrı
+✔ Routing L3 VNI (1000) üzerinden
+✔ Tam EVPN + Symmetric VXLAN best-practice
+
+✅ SENİN SÖYLEDİĞİN MODEL ARTIK DOĞRU
+
+“vxlan10 → vni10
+vxlan20 → vni20 olmalı”
+
+Bu aynı subnet değilse
+ve L3 routing istiyorsan
+%100 doğru tasarımdır.

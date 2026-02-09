@@ -1,0 +1,38 @@
+
+ip igmp profile 1
+ permit
+ range 235.5.5.5
+!
+interface VLAN 1
+ ip address 192.168.5.1 255.255.255.0
+!
+ip igmp snooping ivgl
+ip igmp snooping l2-entry-limit 66
+ip igmp snooping querier
+ip igmp snooping querier query-interval 120
+ip igmp snooping vlan 1 querier
+ip igmp snooping vlan 1 querier address 192.168.5.1
+ip igmp snooping vlan 1 querier version 2
+ip igmp snooping vlan 1 filter 1
+ip igmp snooping vlan 1 static 235.5.5.5 interface GigabitEthernet 0/13
+ip igmp snooping suppression enable
+!
+!
+!
+Ruijie#show  version
+System description      : Ruijie Full Gigabit Security & Intelligence Access Switch (S2910-24GT4SFP-UP-H) By Ruijie Networks
+System start time       : 2026-02-09 08:45:31
+System uptime           : 0:03:30:49
+System hardware version : 3.00
+System software version : S29_RGOS 11.4(1)B70P1
+System patch number     : NA
+System serial number    : G1LQAC6008385
+System boot version     : 1.2.30
+Module information:
+  Slot 0 : S2910-24GT4SFP-UP-H
+    Hardware version    : 3.00
+    Boot version        : 1.2
+    Software version    : S29_RGOS 11.4(1)B70P1
+    Serial number       : G1LQAC6008385
+Ruijie#
+!

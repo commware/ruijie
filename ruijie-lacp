@@ -1,0 +1,32 @@
+Device A configuration file
+!
+interface GigabitEthernet 0/1
+port-group 3
+!
+interface GigabitEthernet 0/2
+port-group 3
+!
+interface AggregatePort 3
+!
+ Device B configuration file
+! i
+nterface GigabitEthernet 0/1
+port-group 3
+!
+interface GigabitEthernet 0/2
+port-group 3
+!
+interface AggregatePort 3
+!
+DeviceA> enable
+DeviceA# configure terminal
+DeviceA(config)# lacp system-priority 4096
+DeviceA(config)# interface range GigabitEthernet 0/1-2
+DeviceA(config-if-range)# port-group 3 mode active
+DeviceA(config-if-range)# end
+Configure LACP Ports on Device B.
+DevicB> enable
+DeviceB# configure terminal
+DeviceB(config)# lacp system-priority 61440
+DeviceB(config)# interface range GigabitEthernet 0/1-2
+DeviceB(config-if-range)# port-group 3 mode active

@@ -30,3 +30,59 @@ DeviceB# configure terminal
 DeviceB(config)# lacp system-priority 61440
 DeviceB(config)# interface range GigabitEthernet 0/1-2
 DeviceB(config-if-range)# port-group 3 mode active
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+!!!!!!!!!!!!!!!!SHOW!!!!!!!!!!!!!!!!!!!!!!
+show lacp  summary
+show lacp  counters
+show aggregatePort  7 summary
+show aggregatePort  summary
+show aggregatePort  load-balance
+show aggregatePort bfd interface
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!11111
+OMURGA#show interfaces aggregatePort 9
+Index(dec):184 (hex):b8
+AggregatePort 9 is UP  , line protocol is UP
+  Hardware is AggregateLink AggregatePort, address is c0a4.763e.85d8 (bia c0a4.763e.85d8)
+  Description: SW1_SW2_Port9
+  Interface address is: no ip address
+  Interface IPv6 address is:
+    No IPv6 address
+  MTU 1500 bytes, BW 25000000 Kbit
+  Encapsulation protocol is Ethernet-II, loopback not set
+  Keepalive interval is 10 sec , set
+  Carrier delay is 2 sec
+  Ethernet attributes:
+    Last link state change time: 2026-03-07 00:38:11
+    Time duration since last link state change: 0 days,  0 hours, 53 minutes, 32 seconds
+    Priority is 0
+    Medium-type is Fiber
+    Admin duplex mode is AUTO, oper duplex is Full
+    Admin speed is AUTO, oper speed is 25G
+    Flow control admin status is OFF, flow control oper status is OFF
+    Admin negotiation mode is OFF, oper negotiation state is OFF
+    Storm Control: Broadcast is OFF, Multicast is OFF, Unicast is OFF
+  Bridge attributes:
+    Port-type: trunk
+    Native vlan: 1
+    Allowed vlan lists: 1-4094
+    Active vlan lists: 1-11,50,70,100
+  Aggregate Port Informations:
+        Aggregate Number: 9
+        Name: "AggregatePort 9"
+        Members: (count=2)
+        Lower Limit: 1
+        TFGigabitEthernet 1/0/9                  Link Status: Up
+        TFGigabitEthernet 2/0/9                  Link Status: Down
+    Load Balance by: Source IP and Destination IP
+  Rxload is 1/255, Txload is 1/255
+  Input peak rate: 4878184041 bits/sec, at 2026-03-01 13:06:51
+  Output peak rate: 5189794220 bits/sec, at 2026-03-01 12:57:06
+   10 seconds input rate 6059 bits/sec, 3 packets/sec
+   10 seconds output rate 56203 bits/sec, 40 packets/sec
+    26798 packets input, 7381393 bytes, 0 no buffer, 0 dropped
+    Received 568 broadcasts, 0 runts, 0 giants
+    0 input errors, 0 CRC, 0 frame, 0 overrun, 0 abort
+    156665 packets output, 40457663 bytes, 0 underruns, 0 no buffer, 0 dropped
+    0 output errors, 0 collisions, 0 interface resets
+OMURGA#
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!

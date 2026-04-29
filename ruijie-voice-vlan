@@ -27,6 +27,9 @@ Ruijie(config-if)# switchport hybrid allowed vlan adduntagged 10,20  //Untag voi
 Ruijie(config-if)# no voice vlan mode auto                   // Switch to manual mode for voice VLAN
 Ruijie(config-if)# voice vlan enable
 Ruijie(config-if)# mac-vlan enable
+############################################################################################33
+Voice VLAN Mode Auto (voice vlan mode auto)
+
 
 Scene 2:
 Topology
@@ -53,3 +56,12 @@ Ruijie(config-if)# switchport hybrid allowed vlan add tagged 10  //Tag voice VLA
 Ruijie(config-if)# no voice vlan mode auto                   // Switch to manual mode for voice VLAN
 Ruijie(config-if)# voice vlan enable
 Ruijie(config-if)# mac-vlan enable
+
+
+##########################################################################################################
+Ne İşe Yarar? * Auto Mode: Switch, LLDP veya CDP protokollerini kullanarak bağlı cihazın bir IP telefon olduğunu otomatik olarak algılar ve VLAN ayarlarını buna göre yapar.
+Manual Mode (no voice vlan mode auto): Senaryoda bu modu kapattığımızda switch'e şunu demiş oluyoruz: "Otomatik algılamaya çalışma, ben sana hangi MAC adreslerinin telefon olduğunu ve hangi VLAN'a gideceklerini (mac-vlan) kendim belirttim."
+Neden Kapatılır? Eğer cihazın LLDP desteği yoksa veya sen trafiği tam olarak kendi yazdığın MAC adreslerine göre (OUI tabanlı) kontrol etmek istiyorsan manuel modu kullanırsın.
+##########################################################################################################
+Özet TabloÖzellikTemel GöreviNeden Kullanılır?SecurityVLAN'ı yabancı cihazlara kapatır.Ses hattına sadece telefonların girmesi için.MAC-VLANMAC adresine göre VLAN atar.Cihazın kimliğine göre (PC mi Telefon mu) trafiği ayırmak için.Auto ModeTelefonu otomatik tanır.Hiç ayar yapmadan telefonun çalışması için (LLDP ile).
+###########################################################################################################

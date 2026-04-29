@@ -1,0 +1,55 @@
+- For Details Please Visit -- 
+https://community.ruijie.com/forum.php?mod=viewthread&tid=781
+-------------------------------------------------------------------------------------------------------------------------------------------
+This recipe show how to configure voice VLAN for IP Phone scene to ensure high priority voice traffic to your network.
+
+Scene 1:
+
+Topology
+DHCP Server --- Access Switch --- IP Phone(untagged traffic) ---- PC
+Voice Vlan: 10
+Data Vlan: 20
+Notes:IP Phone will use untagged traffic by default. Tagged VLAN can be configured on IP Phone manually or obtain specific DHCP option from DHCP server. For more details, please contact manufacturer.
+
+Configuration
+Access Switch
+Ruijie# configure terminal
+Ruijie(config)# vlan 20
+Ruijie(config)# vlan 10
+Ruijie(config)# voice vlan 10
+Ruijie(config)# voice vlan mac-address 0012.3400.0000 maskffff.ff00.0000 description Company A   //Add OUI of IP Phone
+Ruijie(config)# mac-vlan mac-address 0012.3456.7890 maskffff.ffff.ffff vlan 10                     //Add mac-vlan based redirection for IP Phone, redirect to voice VLAN
+Ruijie(config)# no voice vlan security enable            // Disable voice vlan security to allow data traffic
+Ruijie(config)# interface fastEthernet 0/1
+Ruijie(config-if)# switchport mode hybrid   
+Ruijie(config-if)# switchport hybrid native vlan 20   
+Ruijie(config-if)# switchport hybrid allowed vlan adduntagged 10,20  //Untag voice VLAN
+Ruijie(config-if)# no voice vlan mode auto                   // Switch to manual mode for voice VLAN
+Ruijie(config-if)# voice vlan enable
+Ruijie(config-if)# mac-vlan enable
+
+Scene 2:
+Topology
+
+DHCP Server --- Access Switch --- IP Phone(tagged traffic) ---- PC
+
+Voice Vlan: 10
+Data Vlan: 20
+Notes:IP Phone will use untagged traffic by default. Tagged VLAN can be configured on IP Phone manually or obtain specific DHCP option from DHCP server. For more details, please contact manufacturer.
+Configuration
+
+Access Switch
+Ruijie# configure terminal
+Ruijie(config)# vlan 20
+Ruijie(config)# vlan 10
+Ruijie(config)# voice vlan 10
+Ruijie(config)# voice vlan mac-address 0012.3400.0000 mask ffff.ff00.0000 description Company A   //Add OUI of IP Phone
+Ruijie(config)# mac-vlan mac-address 0012.3456.7890 mask ffff.ffff.ffff vlan 10                     //Add mac-vlan based redirection for IP Phone, redirect to voice VLAN
+Ruijie(config)# no voice vlan security enable            // Disable voice vlan security to allow data traffic
+Ruijie(config)# interface fastEthernet 0/1
+Ruijie(config-if)# switchport mode hybrid   
+Ruijie(config-if)# switchport hybrid native vlan 20   
+Ruijie(config-if)# switchport hybrid allowed vlan add tagged 10  //Tag voice VLAN
+Ruijie(config-if)# no voice vlan mode auto                   // Switch to manual mode for voice VLAN
+Ruijie(config-if)# voice vlan enable
+Ruijie(config-if)# mac-vlan enable

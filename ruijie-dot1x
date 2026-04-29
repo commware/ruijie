@@ -135,4 +135,15 @@ dotlx dynamic-vlan enable
 dotlx mac-auth-bypass multi-user
 mls qos trust cos
 
+################################################################################
+terminal mon
+terminal length 0
+debug dot1x event
+debug dot1x error
+debug aaa all
+debug radius all
 
+----User authentication test----
+----wait 5 mini-----
+Show dot1x summar
+################################################################################

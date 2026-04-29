@@ -1,0 +1,32 @@
+Please  Visit For Details 
+https://blog.ruijienetworks.com/blogDetails/?id=865
+----------------------------------------------------------------------------------
+Device model and firmware
+Device Type: Ruijie Switch
+Device Model: S2910C-48GT2XS-HP-E
+Device Version: S29RGOS 11.4(1)B74P1
+----------------------------------------------------------------------------------
+interface GigabitEthernet 0/1 
+switchport mode hybrid
+switchport hybrid native vlan 982
+switchport hybrid allowed vlar add untagged 2,982
+switchport hybrid allowed vlan only tagged 1,3-981,983-4094
+mac-vlan enable
+dotix port-control auto
+dotlx dynamic-vlan enable
+dotlx mac-auth-bypass multi-user
+mls qos trust cos
+-----------------------------------------------------------------------------------
+terminal mon
+terminal length 0
+debug dot1x event
+debug dot1x error
+debug aaa all
+debug radius all
+------------------------------------------------------------------------------------
+
+
+
+----User authentication test----
+----wait 5 mini-----
+Show dot1x summary

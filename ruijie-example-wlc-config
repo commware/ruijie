@@ -1,0 +1,151 @@
+Ruijie#show run
+
+Building configuration...
+Current configuration: 3378 bytes
+
+version AC_RGOS 11.9(2)B2P15, Release(09172019)
+!
+wlan-config 1 Eweb_63F71
+ ssid-code utf-8
+!
+wlan-config 2 Eweb_63F72
+ ssid-code utf-8
+ tunnel local
+!
+ap-group default
+ interface-mapping 1 1 radio 1 ap-wlan-id 1
+ interface-mapping 1 1 radio 2 ap-wlan-id 1
+ interface-mapping 1 1 radio 3 ap-wlan-id 1
+ interface-mapping 1 1 radio 4 ap-wlan-id 1
+ interface-mapping 1 1 radio 5 ap-wlan-id 1
+ interface-mapping 1 1 radio 6 ap-wlan-id 1
+ interface-mapping 1 1 radio 7 ap-wlan-id 1
+ interface-mapping 1 1 radio 8 ap-wlan-id 1
+ interface-mapping 1 1 radio 9 ap-wlan-id 1
+ interface-mapping 1 1 radio 10 ap-wlan-id 1
+ interface-mapping 2 1 radio 1 ap-wlan-id 2
+ interface-mapping 2 1 radio 2 ap-wlan-id 2
+ interface-mapping 2 1 radio 3 ap-wlan-id 2
+ interface-mapping 2 1 radio 4 ap-wlan-id 2
+ interface-mapping 2 1 radio 5 ap-wlan-id 2
+ interface-mapping 2 1 radio 6 ap-wlan-id 2
+ interface-mapping 2 1 radio 7 ap-wlan-id 2
+ interface-mapping 2 1 radio 8 ap-wlan-id 2
+ interface-mapping 2 1 radio 9 ap-wlan-id 2
+ interface-mapping 2 1 radio 10 ap-wlan-id 2
+!
+ap-config all
+!
+ac-controller
+ capwap ctrl-ip 10.10.48.67
+ country CN
+ 802.11g network rate 1 disabled
+ 802.11g network rate 2 disabled
+ 802.11g network rate 5 disabled
+ 802.11g network rate 6 supported
+ 802.11g network rate 9 supported
+ 802.11g network rate 11 mandatory
+ 802.11g network rate 12 supported
+ 802.11g network rate 18 supported
+ 802.11g network rate 24 supported
+ 802.11g network rate 36 supported
+ 802.11g network rate 48 supported
+ 802.11g network rate 54 supported
+ 802.11b network rate 1 disabled
+ 802.11b network rate 2 disabled
+ 802.11b network rate 5 disabled
+ 802.11b network rate 11 mandatory
+ 802.11a network rate 6 mandatory
+ 802.11a network rate 9 supported
+ 802.11a network rate 12 mandatory
+ 802.11a network rate 18 supported
+ 802.11a network rate 24 mandatory
+ 802.11a network rate 36 supported
+ 802.11a network rate 48 supported
+ 802.11a network rate 54 supported
+!
+no identify-application enable
+!
+no register device
+!
+cwmp
+ acs url http://devicereg.ruijienetworks.com/service/tr069servlet
+ cpe inform
+ disable cloud-reg
+!
+install 0 WS6008
+!
+sysmac 28d0.f56d.63f7
+!
+enable service web-server http
+enable service web-server https
+webmaster level 0 username admin password 7 040719152d1420071676
+no service password-encryption
+!
+redundancy
+!
+link-check disable
+!
+nfpp
+!
+wids
+!
+frn
+!
+vlan 1
+!
+interface GigabitEthernet 0/1
+!
+interface GigabitEthernet 0/2
+!
+interface GigabitEthernet 0/3
+!
+interface GigabitEthernet 0/4
+!
+interface GigabitEthernet 0/5
+!
+interface GigabitEthernet 0/6
+!
+interface GigabitEthernet 0/7
+!
+interface GigabitEthernet 0/8
+!
+interface VLAN 1
+ ip address dhcp
+!
+wlansec 1
+ security rsn enable
+ security rsn ciphers aes enable
+ security rsn akm psk enable
+ security rsn akm psk set-key ascii ewebwifi
+ security wpa enable
+ security wpa ciphers aes enable
+ security wpa akm psk enable
+ security wpa akm psk set-key ascii ewebwifi
+!
+wlansec 2
+ security rsn enable
+ security rsn ciphers aes enable
+ security rsn akm psk enable
+ security rsn akm psk set-key ascii ewebwifi
+ security wpa enable
+ security wpa ciphers aes enable
+ security wpa akm psk enable
+ security wpa akm psk set-key ascii ewebwifi
+!
+line console 0
+line vty 0 4
+ login
+!
+end
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+Ruijie#show ap-config running
+
+Building configuration...
+Current configuration: 61 bytes
+
+!
+ap-config 7085.c4c8.1fba
+ ap-mac 7085.c4c8.1fba
+!
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!

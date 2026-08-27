@@ -1,0 +1,33 @@
+
+terminal monitor
+debug  sta-mng traffic-info-print   664d.0a4c.f3a5
+debug sta-mng 80211kv-debug 2 664d.0a4c.f3a5
+debug sta-mng dump-list
+debug sta-mng 80211kv-debug 2
+debug sta-mng 80211kv-debug 5
+// kapatmak için //no debug all
+
+AP-1(config)#wlan diag enable
+AP-1#show wlan diag sta  sta-mac 664d.0a4c.f3a5
+AP-1#show logging
+
+show dot11 associations 664d.0a4c.f3a5 2/0
+show dot11 associations all-client
+show dot11 mbssid
+show dot11 radio-status
+show dot11 rate-set
+show dot11 wlan  1  
+
+//Noise Floor = " (-80-75-70 üzeri değer no iyi değil)-110 Çok iyi / gürültü kanal çakışması
+//SNR kontrol et 0-31 arası yüksek iyi //odadaki sesimin gürültüye oranı
+// Bağlantı hızını kontrol et // rs_rate_mcs): 648.5 Mbps
+//Hata Oranı (tx/rx_flow_error): 0  Sıfır hata sağlıklı
+//Current Channel Use  = Düşük değere iyi
+---------------------------------------------------------------------------------------------------------
+
+show wlan diag sta sta-mac 664d.0a4c.f3a5 //takip edilecek kişinin MAC adresi
+show wlan diag sta sta-mac 664d.0a4c.f3a5
+show log | in 664d.0a4c.f3a5
+show log | in 664d.0a4c.f3a5
+show run 
+show dot a a

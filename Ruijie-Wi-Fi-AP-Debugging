@@ -31,3 +31,17 @@ show log | in 664d.0a4c.f3a5
 show log | in 664d.0a4c.f3a5
 show run 
 show dot a a
+----------------------------------------capwap----------------------------
+acip ipv4 192.168.1.1 192.168.2.1
+no acip ipv4
+apip ipv4 192.168.1.2 255.255.255.0 192.168.1.1 
+no apip ipv4 
+ap-mode { fit | fat [ dhcp ] | macc } 
+show ap-mode 
+show capwap detail
+show capwap state 
+show capwap statistics 
+-----------------------------------------cwmp-------------------------------
+show cwmp configuration 
+show cwmp status 
+

@@ -1,2 +1,2 @@
-show dot11 association c8:ff:28:7f:07:4c
+show dot11 association c8ff.287f.074c
 show dot11 association all 

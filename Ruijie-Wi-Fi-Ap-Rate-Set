@@ -1,0 +1,44 @@
+
+show dot11 radio-status
+radio status     capability
+----- ---------- ----------
+1     online     b/g/n/ac  
+2     online     a/n/ac    
+3     online     b/a/g/n/ac
+
+2.Kat-A-2#
+
+
+
+
+show dot11 rate-set
+LLCB(1) RATE SET
+Mandatory rate:  1M, 2M, 5.5M, 11M,
+Support   rate:  6M, 9M, 12M, 18M, 24M, 36M, 48M, 54M,
+Mandatory 11n MCS index:
+Support   11n MCS index: 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31,
+Mandatory 11ac MCS index:
+Support   11ac MCS index: 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39,
+LLCB(2) RATE SET
+Mandatory rate:  6M, 12M, 24M,
+Support   rate:  9M, 18M, 36M, 48M, 54M,
+Mandatory 11n MCS index:
+Support   11n MCS index: 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31,
+Mandatory 11ac MCS index:
+Support   11ac MCS index: 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39,
+LLCB(3) RATE SET
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+! 1. WLAN Konfigürasyon Moduna Girin
+wlan-config 1
+
+! 2. 2.4 GHz Radyosundaki Yavaş Dizi Hızlarını (1M, 2M, 5.5M, 11M) Kaldırın
+no rate-set 2.4g 1b 2b 5.5b 11b
+
+! 3. Minimum Temel Hızı (Basic Rate) 12 Mbps Olarak Belirleyin
+rate-set 2.4g 12b 18 24 36 48 54 mandatory 12b
+rate-set 5g 12b 18 24 36 48 54 mandatory 12b
+
+! 4. Değişiklikleri Kaydedin
+end
+write
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!

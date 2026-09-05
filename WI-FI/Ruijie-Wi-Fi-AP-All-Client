@@ -1,2 +1,3 @@
 show dot11 association c8ff.287f.074c 1/0
+show dot11 association c8ff.287f.074c 2/0
 show dot11 association all 

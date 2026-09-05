@@ -1,0 +1,6 @@
+show dot11 association 9c67.d608.4d6e   1/0 
+show dot11 association 9c67.d608.4d6e  2/0 
+show wlan diag sta  sta-mac 9c67.d608.4d6e 
+show dot11 wlan  1  
+show dot11 wlan  2  
+show dot11 wlan  3  

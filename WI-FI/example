@@ -1,0 +1,41 @@
+Ruijie AP (RGOS) üzerinde 2.4 GHz bandındaki yavaş 802.11b hızlarını devre dışı bırakan ve 5 GHz bandındaki kanal genişliğini 40 MHz'e düşüren tam konfigürasyon komut blokları aşağıdadır.
+
+1. Fat AP (Tekil / Standalone AP) Modunda Yapılandırma
+AP cihazına doğrudan SSH/Console ile bağlıysanız şu komutları uygulayın:
+
+Code snippet
+configure terminal
+
+! --- 1. 2.4 GHz Radyo Ayarları (Radio 1/0) ---
+interface dot11radio 1/0
+ rate 1 2 5.5 11 disabled
+ rate 12 basic
+ rate 18 24 36 48 54 supported
+exit
+
+! --- 2. 5 GHz Radyo Ayarları (Radio 2/0) ---
+interface dot11radio 2/0
+ chan-width 40
+exit
+
+end
+write
+2. AC (Wireless Controller / Fit AP) Modunda Yapılandırma
+AP'leriniz bir Kablosuz Ağ Kontrolcüsü (AC) tarafından yönetiliyorsa, komutları AC üzerinde ilgili AP profiline uygulamanız gerekir:
+
+Code snippet
+configure terminal
+
+ap-config AP-1
+ interface dot11radio 1/0
+  rate 1 2 5.5 11 disabled
+  rate 12 basic
+  rate 18 24 36 48 54 supported
+ exit
+ interface dot11radio 2/0
+  chan-width 40
+ exit
+exit
+
+end
+write

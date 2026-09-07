@@ -11,3 +11,5 @@ show dot11 rate-set  // düşük rate-setleri kontrol
 show dot11 statistic 1/0 
 show dot11 statistic 2/0
 show logging | include 9c67.d608.4d6e 
+show dot11 wireless 1/0
+show dot11 wireless 2/0

@@ -1,0 +1,33 @@
+### 1. Ana Wi-Fi RF Kalite ve SNR Matrisi
+
+> **Hesaplama Formülü:** SNR (dB) = Sinyal Gücü (RSSI) - Gürültü Tabanı (Noise Floor)
+
+| Kalite Seviyesi | SNR Değeri (dB) | Tipik Sinyal Gücü (RSSI) | Kabul Edilebilir Gürültü Tabanı | Kullanım Deneyimi ve Etkisi |
+| :--- | :--- | :--- | :--- | :--- |
+| **Mükemmel** | **> 40 dB** | -30 dBm ile -60 dBm | -100 dBm ve altı | Maksimum veri transfer hızı. 4K/8K canlı yayın, online oyunlar ve sıfır gecikme. |
+| **Çok İyi** | **25 - 40 dB** | -60 dBm ile -67 dBm | -95 dBm civarı | Kesintisiz HD video konferans (Zoom/Teams), VoIP aramaları ve yüksek hızlı dosya indirme. |
+| **Yeterli / Normal** | **15 - 24 dB** | -68 dBm ile -75 dBm | -90 dBm civarı | Temel web gezintisi, e-posta ve sosyal medya. Ağır yük altında anlık hız dalgalanmaları. |
+| **Zayıf / Sınırda** | **10 - 14 dB** | -76 dBm ile -80 dBm | -85 dBm civarı | Düşük veri hızları, yüksek ping gecikmesi ve paket tekrarları (retries). |
+| **Kullanılamaz** | **< 10 dB** | -81 dBm ve zayıf | -80 dBm ve üstü | İstemci IP adresi alamaz, sürekli ağdan düşer veya hiç bağlanamaz. |
+
+---
+
+### 2. Gürültü Tabanı (Noise Floor) Seviye Tablosu
+
+| Gürültü Tabanı (dBm) | Seviye | RF Ortam Durumu | Performansa Etkisi |
+| :--- | :--- | :--- | :--- |
+| **-100 dBm ve altı** (örn: -108 dBm) | **Mükemmel** | Tamamen Temiz Spektrum | Dış parazit yoktur. Telsiz çipi tam verimle çalışır. |
+| **-90 dBm ile -99 dBm** | **İyi / Standart** | Temiz İç Mekan | İdeal çalışma aralığıdır. Paket tekrarları minimum seviyededir. |
+| **-80 dBm ile -89 dBm** | **Orta** | Hafif Parazitli | Kalabalık veya yoğun RF ortamı. Sinyal gücü zayıflarsa hız düşer. |
+| **-70 dBm ile -79 dBm** | **Kötü** | Şiddetli Parazit Var | Mikrodalga, Bluetooth veya komşu AP çakışması. Paket kaybı oluşur. |
+| **-70 dBm ve üzeri** (örn: -65 dBm) | **Kritik / Çok Kötü** | Aşırı Kirli / Tıkalı | RF ortamı kullanılamaz durumdadır. Bağlantılar kopar. |
+
+---
+
+### 3. Örnek Senaryo Karşılaştırması
+
+| Senaryo | Sinyal Gücü (RSSI) | Gürültü Tabanı | Hesaplanan SNR | Durum Derecesi |
+| :--- | :--- | :--- | :--- | :--- |
+| **Senaryo A (Temiz Ortam - 5 GHz)** | -65 dBm | -108 dBm | **43 dB** | **Mükemmel** (Tam Hız) |
+| **Senaryo B (Yoğun Ortam - 2.4 GHz)** | -65 dBm | -80 dBm | **15 dB** | **Sınırda** (Yavaşlama Var) |
+| **Senaryo C (Parazitli / Mikrodalga)** | -70 dBm | -72 dBm | **2 dB** | **Kullanılamaz** (Kopma Yaşanır) |

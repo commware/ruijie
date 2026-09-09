@@ -4,9 +4,15 @@ show dot11 association 9c67.d608.4d6e  2/0
 show wlan diag sta  sta-mac 9c67.d608.4d6e 
 show dot11 wlan  1  
 show dot11 wlan  2  
-show dot11 wlan  3  
-clear counters
+show dot11 wlan  3
+!
+clear counters  //istatistikleri sil
+!
 show interfaces counters 
+show interfaces counters increment 
+show interfaces dot11radio 1/0
+show interfaces dot11radio 2/0
+!
 show dot11 rate-set  // düşük rate-setleri kontrol
 show dot11 statistic 1/0 
 show dot11 statistic 2/0

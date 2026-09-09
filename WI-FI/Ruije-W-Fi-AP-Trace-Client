@@ -10,6 +10,10 @@ clear counters  //istatistikleri sil
 !
 show interfaces counters 
 show interfaces counters increment 
+show interfaces counters  summary
+show interfaces counters rate 
+show interfaces counters errors 
+!
 show interfaces dot11radio 1/0
 show interfaces dot11radio 2/0
 !

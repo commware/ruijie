@@ -1,0 +1,29 @@
+
+AP-1#show dot11 association all    //AP'NIN YANINDAKI PERFORMANS DEGERLERI
+RADIO-ID WLAN-ID ADDR              AID  CHAN        RATE_DOWN   RATE_UP RSSI ASSOC_TIME IDLE TXSEQ  RXSEQ  ERP  STATE  CAPS HTCAPS VHT_MU_CAP HECAPS
+2        1       9c:67:d6:08:4d:6e 95   52/5G       1201.0M     1201.0M 64      0:01:36 0    2766   21472  0x0  0x13   ERs  WSM    SU         HE  
+
+
+AP-1#show dot11 association 9c67.d608.4d6e   1/0 
+AP-1#show dot11 association 9c67.d608.4d6e  2/0     //AP'NIN YANINDAKI PERFORMANS DEGERLERI
+The details of client 9c67.d608.4d6e.
+    RSSI.................... 52                     //RSSI YUKSEK DEGER IYI
+    SNR..................... -43                    //SNR YUKSEK DEGER IYI
+    AID..................... 95                     // KİMLİK NO 
+
+	INSSID Degeri =        -50
+ 
+ 
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+AP-1#show dot11 association all   //AP'DEN UZAK PERFORMANS DEGERLERI // IKI DUVAR ARKASINDA               
+RADIO-ID WLAN-ID ADDR              AID  CHAN        RATE_DOWN   RATE_UP RSSI ASSOC_TIME IDLE TXSEQ  RXSEQ  ERP  STATE  CAPS HTCAPS VHT_MU_CAP HECAPS
+2        2       9c:67:d6:08:4d:6e 99   52/5G        288.5M      216.5M 18      0:12:42 0    22923  29248  0x0  0x13   ERs  WSM    SU         HE    
+
+AP-1#show dot11 association 9c67.d608.4d6e  2/0
+The details of client 9c67.d608.4d6e.
+    RSSI.................... 15					//RSSI DAHA DUSUK SU AN 
+    SNR..................... -80				//SNR DAHA DUSUK SU AN
+    AID..................... 99
+	
+	INSSID Degeri =        -70
+	

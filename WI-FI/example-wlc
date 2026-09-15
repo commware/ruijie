@@ -1,0 +1,22 @@
+configure terminal
+wlan-config 3 ornek-ssid-local
+ tunnel local
+wlan-config 4 ornek-ssid-tunnel
+ tunnel remote
+wlansec 3
+ security rsn enable
+ security rsn ciphers aes enable
+ security rsn akm psk enable
+ security rsn akm psk set-key ascii Sifreniz123
+wlansec 4
+ security rsn enable
+ security rsn ciphers aes enable
+ security rsn akm psk enable
+ security rsn akm psk set-key ascii Sifreniz123
+ap-group default
+ interface-mapping 3 400 radio 1 ap-wlan-id 3
+ interface-mapping 3 400 radio 2 ap-wlan-id 3
+ interface-mapping 4 400 radio 1 ap-wlan-id 4
+ interface-mapping 4 400 radio 2 ap-wlan-id 4
+end
+write

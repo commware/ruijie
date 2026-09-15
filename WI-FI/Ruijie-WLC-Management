@@ -1,0 +1,51 @@
+Configuring SSH on AC
+Ruijie>enable
+Password:
+Ruijie#configure terminal
+Ruijie(config)#enable service ssh-server
+Ruijie(config)#crypto key generate dsa
+Choose the size of the key modulus in the range of 360 to 2048 for your
+Signature Keys. Choosing a key modulus greater than 512 may take
+a few minutes.
+How many bits in the modulus [512]:
+% Generating 512 bit DSA keys. ..[ok]
+Ruijie(config)#interface vlan 1
+Ruijie(config-if-VLAN 1)#ip address 192.168.1.1 255.255.255.0
+Ruijie(config)#ip route 0.0.0.0 0.0.0.0 192.168.1.2
+Ruijie(config)#enable password ruijie
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+Method 1: Login with password
+Ruijie(config)#line vty 0 4
+Ruijie(config-line)#password ruijie
+Ruijie(config-line)#login
+Ruijie(config-line)#end
+Ruijie#write
+Building configuration...
+[OK]
+Ruijie#
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+Method 2: Login with username & password
+Ruijie(config)#line vty 0 4
+Ruijie(config-line)#login local
+Ruijie(config-line)#exit
+Ruijie(config)#username admin password ruijie
+Ruijie(config)#end
+Ruijie#write
+Building configuration...
+[OK]
+Ruijie
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+ Configuring WEB GUI on AC
+Ruijie#configure terminal
+Ruijie(config)#enable service web-server
+Ruijie(config)#vlan 1
+Ruijie(config-vlan)#interface vlan 1
+Ruijie(config-if-VLAN 1)#ip address 192.168.1.1 255.255.255.0
+Ruijie(config-if-VLAN 1)#exit
+Ruijie(config)#webmaster level ?
+<0-2> Web auth privilege level (0 is the highest level)
+Ruijie(config)#webmaster level 0 username ruijie password ruijie
+Ruijie(config)#ip route 0.0.0.0 0.0.0.0 192.168.1.254      
+
+
+       

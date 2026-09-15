@@ -1,0 +1,33 @@
+! ==========================================
+! 1. SSID (WLAN) TANIMI VE KODLAMASI
+! Bu bölümde kablosuz ağın havada görünecek adı (SSID) tanımlanır.
+! ==========================================
+dot11 wlan 3
+ ssid 8021x
+ ssid-code utf-8
+
+! ==========================================
+! 2. GÜVENLİK VE 802.1X AYARLARI (WLANSEC ID)
+! Bu bölümde SSID'nin şifreleme türü (WPA2/AES) ve RADIUS 
+! kimlik doğrulama/hesap tutma metotları WLAN ID (3) ile eşleştirilir.
+! ==========================================
+wlansec 3
+ security rsn enable
+ security rsn ciphers aes enable
+ security rsn akm 802.1x enable
+ dot1x authentication macc2_dot1x_auth_method_wlan_3
+ dot1x accounting macc2_dot1x_account_method_wlan_3
+
+! ==========================================
+! 3. RADYO / AP ARAYÜZ BAĞLANTISI (VAP / WLAN-ID ATAMASI)
+! Bu bölümde, yukarıda oluşturduğumuz SSID ve güvenlik profili (WLAN 3),
+! AP'nin fiziksel radyo kartlarına (2.4 GHz ve 5 GHz) alt arayüz (sub-interface)
+! olarak bağlanarak havaya yayın verilmesi sağlanır.
+! ==========================================
+interface Dot11radio 1/0.3
+ encapsulation dot1Q 1
+ wlan-id 3     ! <-- WLAN 3 profilini 2.4 GHz radyoya bağlar
+
+interface Dot11radio 2/0.3
+ encapsulation dot1Q 1
+ wlan-id 3     ! <-- WLAN 3 profilini 5 GHz radyoya bağlar

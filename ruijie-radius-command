@@ -1,0 +1,43 @@
+You can configure your radius on the switch with the following command.
+Command	Function
+aaa group server radius	Configure a RADIUS AAA server group.
+ip  radius source-interface	Specifies the source address of RADIUS packets.
+ip oob	Select MGMT port for the AAA server group.
+ip  vrf forwarding	Select vrf for AAA Server Group .
+radius attribute	Configure the private attribute type value.
+radius  data-flow-format	Configure the unit of data flow and data packet sent  to RADIUS server
+radius  dscp	Configuring the DSCP Priority of RADIUS Packets
+radius vendor-specific extend	Expanded to not distinguish between private vendor ids .
+radius  vendor-specific attribute support	Configure the private attributes of Cisco, Huawei, and Microsoft  in RADIUS parsing packets.
+radius-server  accounting-copy	Configuring the copy of billing messages
+radius-server  accounting-on enable	Configure the switch to send accounting-on message  when NAS restarts
+radius-server account update retransmit	Configuring the function of retransmitting accounting update  messages for second-generation Web authentication users
+radius-server  attribute 30	Specify the format of the RADIUS Called-Station-ID attribute
+radius-server attribute 31	Specifies the format of the RADIUS Calling-Station-ID attribute  ( MAC -based ).
+radius-server  attribute nas-port-id format	Specifies the encapsulation format of the RADIUS  NAS-Port-ID attribute.
+radius-server attribute class	Configure the parsing mode  of the RADIUS Class attribute.
+radius-server dead-criteria	Configure the standard for the device to determine that  the RADIUS security server is unreachable.
+radius-server deadtime	Configure the time length during which the device stops sending request  packets to a RADIUS security server that is unreachable .
+radius-server group-attribute { 25 | 125 }	Specify the user group information attribute to be parsed as RADIUS  attribute No. 25 or Ruijie RADIUS private  attribute No. 125
+radius-server host	Specify the RADIUS security server host.
+radius-server key	Defines the shared password for the network access server (routing  device) to communicate with the RADIUS security server.
+radius-server retransmit	Configure the number of times the device resends a packet before it  considers the RADIUS security server to be unresponsive.
+radius-server source-port	Configure the source port for sending RADIUS packets.
+radius-server timeout	Configure the time during which the device waits for a response from the  security server after resending RADIUS packets.
+radius-server authentication attribute	Configure the RADIUS authentication request packet to carry the  specified attribute
+radius-server account attribute	Configure RADIUS Accounting-Request packets to carry specified  attributes
+radius-server authentication vendor	Configure the RADIUS authentication request packet to carry the  specified vendor private attribute
+radius-server account vendor	Configure RADIUS accounting-request packets to carry the  specified vendor private attributes
+radius  set qos cos	Set the MGMT value delivered by RADIUS to the  interface cos value.
+radius support c ui​	Set RADIUS support cui attribute
+server auth-port acct-port	Add servers to the AAA server group.
+show  radius acct statistics	Displays RADIUS accounting statistics .
+show  radius auth statistics	Displays RADIUS authentication statistics.
+show  radius group	Displays the configuration of a RADIUS server group.
+show radius parameter	Displays global parameters of the RADIUS server.
+show radius server	Display the RADIUS server configuration.
+show radius vendor-specific	Displays the RADIUS private attribute type configuration.
+show  radius attribute	Display RADIUS attributes
+show  radius-server accounting-copy	Display accounting message copy configuration
+show radius-server group-attribute	Displays the properties of the resolved user group
+radius-server  account bind authentication server	Configure the authentication server binding function.

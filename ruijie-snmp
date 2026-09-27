@@ -1,5 +1,6 @@
 enable
 configure terminal
+enable service snmp-agent 
 
 ! 1. Sadece izleme sunucunuza izin veren Access-List (ACL) //SNMP SERVER IP solarwinds,zabbix
 access-list 10 permit host 192.168.4.100

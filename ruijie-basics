@@ -62,7 +62,7 @@ snmp-server location  ankara@ankara
 snmp-server group snmpv2-group v2c 		              /SNMP Group Olusturma
 snmp-server user snmpv2-user snmpv2-group v2c             /SNMP User  Olusturma
 snmp-server group snmpv2-group v2c  write default  /SNMP Group Erisim verme 
-snmp-server community snmp-comm rw 					  /SNMP Community Olusturma
+snmp-server community Snmp-com1! rw 					  /SNMP Community Olusturma
 snmp-server enable traps
 
 -----------------------------------------------------------------

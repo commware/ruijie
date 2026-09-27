@@ -1,0 +1,31 @@
+enable
+configure terminal
+
+! 1. Sadece izleme sunucunuza izin veren Access-List (ACL) //SNMP SERVER IP solarwinds,zabbix
+access-list 10 permit host 192.168.4.100
+
+! 2. ACL korumalı Read-Only (RO) Community tanımı
+snmp-server community Snmp-C0M rw 10
+
+! 3. Trap (Anlık Uyarı) gönderimini aktifleştirme
+snmp-server enable traps
+snmp-server host 192.168.4.100 version 2c Snmp-C0M
+
+! 4. İsteğe bağlı cihaz konum ve iletişim bilgileri
+snmp-server location "Sistem Odasi"
+snmp-server contact "Agi Yoneticisi"
+
+! 5. Yapılandırmayı kaydetme
+end
+write memory
+
+
+
+
+
+1.      Run the show running-config command to display configuration information of the device.
+2.      Run the show snmp user command to display the SNMP user.
+3.      Run the show snmp view command to display the SNMP view.
+4.      Run the show snmp group command to display the SNMP group.
+5.      Run the show snmp host command to display the host information configured by the user.
+6.      Install MIB-Browser.

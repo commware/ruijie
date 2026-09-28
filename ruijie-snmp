@@ -1,18 +1,19 @@
 enable
 configure terminal
 enable service snmp-agent 
-access-list 10 permit host 192.168.4.100
-snmp-server community Snmp-C0M rw 10
-snmp-server community Snmp-C0M ro 10
+snmp-server community Snmp-C0M rw 
+snmp-server community Snmp-C0M ro 
 snmp-server enable traps
 snmp-server host 192.168.4.100 version 2c Snmp-C0M
 snmp-server location "Sistem Odasi"
 snmp-server contact "Agi Yoneticisi"
 end
 write memory
-
-
-
+###################ACL ILE BAĞLAMA ###############################
+access-list 10 permit host 192.168.4.100  //sadece bu ip erisim saglar
+snmp-server community Snmp-C0M rw 10
+snmp-server community Snmp-C0M ro 10
+###################ACL ILE BAĞLAMA ###############################
 
 
 show running-config

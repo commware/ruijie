@@ -147,3 +147,43 @@ debug radius all
 ----wait 5 mini-----
 Show dot1x summar
 ################################################################################
+# Ruijie 802.1X & RADIUS Command Reference
+## Configuration & Management Commands
+| Command | Description |
+| :--- | :--- |
+| `no dot1x port-control auto` | Disables 802.1X port control auto mode. |
+| `clear dot1x user` | Clears 802.1X user information. |
+| `dot1x default` | Restores the default 802.1X configuration. |
+---
+## Displaying Commands
+| Command | Description |
+| :--- | :--- |
+| `show radius server` | Displays the parameters and status of the RADIUS server. |
+| `show dot1x` | Displays 802.1X status and parameters. |
+| `show dot1x auto-req` | Displays the proactive authentication status. |
+| `show dot1x port-control` | Displays information about controlled ports. |
+| `show dot1x probe-timer` | Displays the status and parameters of host probe. |
+| `show dot1x summary` | Displays information about authenticated users. |
+| `show dot1x max-req` | Displays the maximum count of EAP-Request/Challenge packet retransmission. |
+| `show dot1x private-supplicant-only` | Displays filtering of non-Ruijie supplicants. |
+| `show dot1x re-authentication` | Displays the re-authentication status. |
+| `show dot1x reauth-max` | Displays the maximum count of EAP-Request/Identity packet retransmission. |
+| `show dot1x timeout quiet-period` | Displays the quiet period after authentication fails. |
+| `show dot1x timeout re-authperiod` | Displays the re-authentication interval. |
+| `show dot1x timeout server-timeout` | Displays the timeout interval of the authentication server. |
+| `show dot1x timeout supp-timeout` | Displays the timeout interval of the supplicant. |
+| `show dot1x timeout tx-period` | Displays the interval for retransmitting EAP-Request/Identity packets. |
+| `show dot1x user mac` | Displays user information based on the MAC address. |
+| `show dot1x user name` | Displays user information based on the user name. |
+---
+## Debugging Commands
+> ⚠️ **Warning:** Debugging occupies significant system resources. Disable it immediately when troubleshooting is finished using `no debug all` or specific `no debug` commands.
+| Command | Description |
+| :--- | :--- |
+| `debug aaa` | Debugs AAA events and protocol operations. |
+| `debug radius` | Debugs RADIUS authentication/accounting packets. |
+| `debug dot1x event` | Debugs 802.1X events. |
+| `debug dot1x packet` | Debugs 802.1X EAPOL packets. |
+| `debug dot1x stm` | Debugs 802.1X state machine (STM). |
+| `debug dot1x com` | Debugs 802.1X internal communication. |
+| `debug dot1x error` | Debugs 802.1X errors. |

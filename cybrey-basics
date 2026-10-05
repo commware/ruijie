@@ -1,0 +1,6 @@
+!!!!!!!!!!!!!!!!!!! UPGRADE !!!!!!!!!!!!!!!!!!!!!11111
+Ruijie#upgrade download tftp://192.168.1.100/rgos.bin
+CS:
+Ruijie#copy tftp:///xxx_install.bin tmp:xxx_install.bin
+After copying successfully
+Ruijie#upgrade tmp:xxx_install.bin

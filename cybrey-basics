@@ -4,3 +4,12 @@ CS:
 Ruijie#copy tftp:///xxx_install.bin tmp:xxx_install.bin
 After copying successfully
 Ruijie#upgrade tmp:xxx_install.bin
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+Note: Before upgrading APs via AC, please ensure APs can ping each other. Otherwise distributed upgrade may fail and upgrade time will increase significantly.
+If port protection [switchport protected] is configured on the switch and prevents AP communication, enable proxy ARP on the AP gateway.
+Example: Enable Proxy ARP on AP Gateway:
+Ruijie(config)#interface vlan 50
+Ruijie(config-if-VLAN 50)#local-proxy-arp
+Ruijie(config-if-VLAN 50)#end
+Ruijie#write
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!

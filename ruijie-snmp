@@ -4,9 +4,12 @@ enable service snmp-agent
 snmp-server community Snmp-C0M rw 
 snmp-server community Snmp-C0M ro 
 snmp-server enable traps
-snmp-server host 192.168.4.100 version 2c Snmp-C0M
+no snmp-server enable version v1
+snmp-server enable version v2c
+snmp-server enable version v3
 snmp-server location "Sistem Odasi"
 snmp-server contact "Agi Yoneticisi"
+snmp-server host 192.168.4.100 version 2c Snmp-C0M   //TRAP Gondermek Icin
 end
 write memory
 ###################ACL ILE BAĞLAMA ###############################

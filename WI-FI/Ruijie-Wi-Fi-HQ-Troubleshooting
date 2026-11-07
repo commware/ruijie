@@ -1,0 +1,74 @@
+1. Sorundan etkilenen dizüstü bilgisayarda toplanması gereken bilgiler
+Lütfen sorunun yaşandığı dizüstü bilgisayarın Komut İstemi (CMD) penceresinde aşağıdaki komutları çalıştırarak çıktıları bizimle paylaşın:
+"
+ipconfig /all
+route print
+arp -a
+tracert 8.8.8.8
+ping [Gateway IP] -t
+ping 8.8.8.8 -t
+"
+2. AP üzerinde toplanması gereken bilgiler
+Lütfen APnin CLI arayüzünde aşağıdaki komutları çalıştırarak ilgili çıktıları toplayın:
+"
+terminal monitor
+terminal length 0
+show run
+show version
+show logging
+show dot a a
+show dot wireless 1/0
+show dot wireless 2/0
+show dot wireless 3/0
+show int cou rate
+show int
+show int
+cleR
+show int cou sum
+show nfpp packet drop
+show cpu-protect type arp
+show mac count
+show arp
+debug syslog limit number 0 time 0
+y
+debug syslog limit reset
+debug packets function all protocol 0x21 xxxx.xxxx.xxxx
+debug packets sdk 1 function all protocol 0x21 xxxx.xxxx.xxxx
+debug support
+execute diagnose-cmd sh efmp_demo
+
+exit
+"
+"
+clear efmp flow counter
+debug efmp packet filter src_mac 44c6.3c23.ea77 counter 100
+debug efmp packet filter ipv4_sip host 172.16.242.74 counter 100
+"
+Not: Bazı AP modellerinde aşağıdaki ek komutların da çalıştırılması gerekmektedir.
+debug sup
+"
+"
+Ardından aşağıdaki komutu çalıştırın:
+"
+diagnose-cmd dmesg -c
+"
+Yukarıdaki komut desteklenmiyorsa, lütfen aşağıdaki alternatif yöntemi kullanın:
+"
+run-system-shell
+""
+dmesg -c
+"
+Paket yakalama ve hata ayıklama işlemi hakkında:
+Sabit sayıda paket göndererek test gerçekleştirmeniz gerekmektedir. Örneğin, her test döngüsünde 500 bayt boyutunda 100 paket gönderilebilir.
+Paket kaybı durumunu takip edin. Paket kaybı tespit edildiğinde ilgili testi durdurun ve AP üzerindeki hata ayıklama çıktılarının tamamlanmasını bekleyin.
+İstemci MAC adresine göre filtreleme:
+"
+debug efmp packet filter src_mac 44c6.3c23.ea77 counter 100
+"
+İstemci IP adresine göre filtreleme:
+"
+debug efmp packet filter ipv4_sip host 172.16.242.74 counter 100
+"
+Toplanan tüm komut çıktıları, ekran görüntüleri ve diğer ilgili bilgileri bizimle paylaşmanızı rica ederiz.
+İş birliğiniz için teşekkür ederiz. Sorunun kaynağını en kısa sürede tespit edebilmek için desteğinizi bekliyoruz.
+Saygılarımızla,

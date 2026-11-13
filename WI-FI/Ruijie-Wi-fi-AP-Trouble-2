@@ -1,0 +1,53 @@
+ regards this issue "Clients disconnect at random times; reconnection takes long or needs several attempts. "
+pls collect below command outputs.
+
+-----Enable WLOG in advance----
+con
+wlan diag enable
+end
+wr
+----Collect when the terminal disconnect--------
+terminal mon
+terminal length 0
+show ac-config client 
+show ac-config 802.11b summary
+show ac-config 802.11a summary
+sh ap-con radio 1 status AP_Name    (here input ap name client connected to)
+sh ap-con radio 2 status AP_Name    (here input ap name client connected to)
+debug dot1x event 
+debug dot1x error 
+debug aaa all 
+debug radius all 
+
+----collect below after issue restore---
+show wlan diag sta sta-mac xxxx.xxxx.xxxx (client terminal mac address)
+show dot1x user diag mac xxxx.xxxx.xxxx (client terminal mac address)
+show log
+----NFP ARP GUARD 
+show nfpp arp-guard summary
+show nfpp arp-guard scan
+show nfpp arp-guard hosts
+---- SHOW AP 
+show ap inventory
+show ap updating-list
+show ap product
+show ap running
+show ap radio
+show ap local-wtp-info Cybrey-AP-1
+show ap eth-statistic Cybrey-AP-1
+show ap reboot   Cybrey-AP-1
+show ap wtp-info Cybrey-AP-1
+show ap board-data  Cybrey-AP-1
+show ap radio info   Cybrey-AP-1
+show ap radio status Cybrey-AP-1
+------------
+show ap-config summary 
+show version all
+------------------ show capwap state  -----------------
+show capwap server state
+show ac-config active-bin
+show capwap statistic 
+------------------ show wlan diag network -----------------
+show arp packet statistics
+------------------------------------------------------------------------
+show ipv6 neighbors statistics all

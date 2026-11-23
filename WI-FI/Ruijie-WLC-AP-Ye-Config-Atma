@@ -1,0 +1,13 @@
+! AP ismi "KUTUPHANE_OUTDOOR"  WLC üzerinden AP'ye bağlanıyorum ve SSH Enable ediyorum
+
+RuijieWLC(config)#ap-config KUTUPHANE_OUTDOOR   //WLC üzerinde AP config modu açılıyor
+"You are going to config AP(KUTUPHANE_OUTDOOR), which is online now."
+!
+exec-cmd mode config cmd "enable service ssh-server"
+exec-cmd mode config cmd "username admin password Telnet12345"
+exec-cmd mode config cmd "enable password apdebug"
+exec-cmd mode config cmd "line vty 0 4"
+exec-cmd mode line cmd "login local"
+exec-cmd mode line cmd "transport input ssh"
+exec-cmd mode line cmd "wr"
+!

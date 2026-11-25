@@ -1,1 +1,52 @@
 
+term le 0
+show version
+show version all
+show running
+show ap-config running
+
+
+show ac-config client by-ap-name
+show ap-config summary
+show ap-group aps summary
+show capwap state
+show capwap statistics
+show capwap detail
+show wlan-config summary
+show ac-config 802.11a summary
+show ac-config 802.11b summary
+show interfaces counters rate
+show interfaces counters summary
+show radius server 
+show dot1x 
+show dot1x summary
+show radius auth statistics 
+show logging
+!
+!
+!
+ter le 0
+!ter monitor
+!
+!CLIENT MAC EKLE
+
+ter le 0
+show ac-config client detail 34C9.3D0A.B6DF
+show wlan diag sta sta-mac 34C9.3D0A.B6DF
+show dot1x user diag mac 34C9.3D0A.B6DF
+ !(this command must run on master AC and slave AC)
+!
+show ac-config client detail a402.b924.784a
+show wlan diag sta sta-mac a402.b924.784a
+show dot1x user diag mac a402.b924.784a
+!
+show ac-config client detail 0c2f.b09e.6fec
+show wlan diag sta sta-mac 0c2f.b09e.6fec
+show dot1x user diag mac 0c2f.b09e.6fec
+!
+
+
+ 
+
+
+

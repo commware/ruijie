@@ -28,7 +28,7 @@ ter le 0
 !ter monitor
 !
 !CLIENT MAC EKLE
-
+!
 ter le 0
 show ac-config client detail 34C9.3D0A.B6DF
 show wlan diag sta sta-mac 34C9.3D0A.B6DF

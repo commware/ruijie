@@ -1,11 +1,10 @@
-
+!
 term le 0
 show version
 show version all
 show running
 show ap-config running
-
-
+!
 show ac-config client by-ap-name
 show ap-config summary
 show ap-group aps summary
